@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="container">
+        <div class="col-md-9">
+            <div>
+                <blockquote>
+                    <h1><a href="http://angularcode.com/voting-system-similar-to-stackoverflow-using-angularjs-php-and-mysql/">Voting System Using AngularJS + PHP + MySQL</a></h1>
+                </blockquote>
+                <h5>Click on the up/down arrow against each entry bellow to Vote</h5>
+                <ul class="thumbnails" >
+                    <li ng-repeat="post in posts | orderBy:'-votes'" class="clearfix">
+                        <div class="col-lg-1 voting card card-block">
+                            <div class="votingButton" ng-click="upVote(post);"> <i class="fa fa-chevron-up"></i>
+                            </div>
+                            <div class="label label-pill label-success">
+                                <div>{{post.votes}}</div>
+                            </div>
+                            <div class="votingButton" ng-click="downVote(post);"> <i class="fa fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="card card-block col-lg-11">
+                            <h4><a href="{{post.url}}">{{post.title}}</a></h4>
+                            <p>{{post.description}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

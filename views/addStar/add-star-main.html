@@ -1,0 +1,57 @@
+<div class="container">
+    <h2 class="title text-xs-center">AngularJS Insert Update Delete Using PHP MySQL</h2>
+    <div class="row mt80">
+        <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 animated fadeInDown">
+            <div class="alert alert-danger text-xs-center alert-failure-div" role="alert"
+                 style="display: none;">
+                <p></p>
+            </div>
+            <div class="alert alert-success text-xs-center alert-success-div" role="alert"
+                 style="display: none;">
+                <p></p>
+            </div>
+            <form novalidate="novalidate" name="userForm">
+                <div class="form-group">
+                    <tag tag-default="tag-default" for="name">Name
+                        <input ng-model = "star.name" type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                />
+                    </tag>
+                    <tag tag-default="tag-default" for="name">Name
+                        <input ng-model = "star.image" type="text" class="form-control" id="image" name="image" placeholder="Name"
+                                />
+                    </tag>
+                </div>
+                <div class="text-xs-center">
+                    <button data-loading-text="Saving User..."  ng-click="addUser()" class="btn btn-save">Save User</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8 animated fadeInUp">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="20%">Name</th>
+                        <th width="20%">Email</th>
+                        <th width="20%">Company Name</th>
+                        <th width="15%">Designation</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in post.users">
+                        <th scope="row">1</th>
+                        <td>{{user.name}}</td>
+                        <td>{{user.image}}</td>
+                        <td>SmartTutorials.net</td>
+                        <td>Director</td>
+                        <td><span> Edit</span> | <span>Delete</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
