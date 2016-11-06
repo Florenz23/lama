@@ -12,7 +12,7 @@ angular.module('myApp')
             $http({
                 method: 'post',
                 url: url,
-                data: $.param({'user': $scope.star, 'type': 'save_user'}),
+                data: $.param({'pStar': $scope.tempUser, 'type': 'save_pStar'}),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).
                 success(function (data, status, headers, config, error) {
@@ -66,10 +66,9 @@ angular.module('myApp')
         $scope.editUser = function (user) {
             $scope.tempUser = {
                 id: user.id,
-                name: user.name,
-                email: user.email,
-                companyName: user.companyName,
-                designation: user.designation
+                stageName: user.stageName,
+                scoreImageUrl: user.scoreImageUrl,
+                pStarVotes: user.pStarVotes,
             };
             $scope.editMode = true;
             $scope.index = $scope.post.users.indexOf(user);
@@ -82,7 +81,7 @@ angular.module('myApp')
                 $http({
                     method: 'post',
                     url: url,
-                    data: $.param({'id': user.id, 'type': 'delete_user'}),
+                    data: $.param({'id': user.id, 'type': 'delete_pStar'}),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).
                     success(function (data, status, headers, config) {

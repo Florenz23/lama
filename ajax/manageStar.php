@@ -9,11 +9,11 @@ if( isset($_POST['type']) && !empty( isset($_POST['type']) ) ){
 	$type = $_POST['type'];
 
 	switch ($type) {
-		case "save_user":
-			save_user($mysqli);
+		case "save_pStar":
+			save_pStar($mysqli);
 			break;
-		case "delete_user":
-			delete_user($mysqli, $_POST['id']);
+		case "delete_pStar":
+			delete_pStar($mysqli, $_POST['id']);
 			break;
 		case "getUsers":
 			getUsers($mysqli);
@@ -29,22 +29,24 @@ if( isset($_POST['type']) && !empty( isset($_POST['type']) ) ){
  * This function will handle user add, update functionality
  * @throws Exception
  */
-function save_user($mysqli){
+function save_pStar($mysqli){
 	try{
 		$data = array();
-		$name = $mysqli->real_escape_string(isset( $_POST['user']['name'] ) ? $_POST['user']['name'] : '');
-		$image = $mysqli->real_escape_string(isset( $_POST['user']['image'] ) ? $_POST['user']['image'] : '');
-		$id = $mysqli->real_escape_string( isset( $_POST['user']['id'] ) ? $_POST['user']['id'] : '');
+		$stageName = $mysqli->real_escape_string(isset( $_POST['pStar']['stageName'] ) ? $_POST['pStar']['stageName'] : '');
+		$scoreImageUrl = $mysqli->real_escape_string(isset( $_POST['pStar']['scoreImageUrl'] ) ? $_POST['pStar']['scoreImageUrl'] : '');
+		$pStarVotes = $mysqli->real_escape_string(isset( $_POST['pStar']['pStarVotes'] ) ? $_POST['pStar']['pStarVotes'] : '');
+		$id = $mysqli->real_escape_string( isset( $_POST['pStar']['id'] ) ? $_POST['pStar']['id'] : '');
 
-		if($name == '' || $image == '' ){
+		if($stageName == '' || $scoreImageUrl == '' ){
 			throw new Exception( "Required fields missing, Please enter and submit" );
 		}
 
 
 		if(empty($id)){
-			$query = "INSERT INTO employee ( `name`, email, `companyName`, `designation`) VALUES ( '$name', '$email', '$companyName', '$designation')";
+			$query = "INSERT INTO pStarsTable ( `stageName`,`scoreImageUrl`, `pStarVotes`) VALUES ( '$stageName', '$scoreImageUrl', 0)";
 		}else{
-			$query = "UPDATE employee SET `name` = '$name', email = '$email', `companyName` = '$companyName', `designation` = '$designation' WHERE `employee`.`id` = $id";
+			$query = "UPDATE pStarsTable SET `stageName` = '$stageName',`scoreImageUrl` = '$scoreImageUrl', `pStarVotes` = $pStarVotes WHERE `pStarsTable`.`id` = $id";
+			//echo $query;
 		}
 
 		if( $mysqli->query( $query ) ){
@@ -73,10 +75,10 @@ function save_user($mysqli){
  * @param string $id
  * @throws Exception
  */
-function delete_user($mysqli, $id = ''){
+function delete_pStar($mysqli, $id = ''){
 	try{
 		if(empty($id)) throw new Exception( "Invalid User." );
-		$query = "DELETE FROM `employee` WHERE `id` = $id";
+		$query = "DELETE FROM `pStarsTable` WHERE `id` = $id";
 		if($mysqli->query( $query )){
 			$data['success'] = true;
 			$data['message'] = 'User deleted successfully.';
@@ -102,7 +104,7 @@ function delete_user($mysqli, $id = ''){
 function getUsers($mysqli){
 	try{
 
-		$query = "SELECT * FROM `employee` order by id desc limit 8";
+		$query = "SELECT * FROM `pStarsTable` order by id desc limit 8";
 		$result = $mysqli->query( $query );
 		$data = array();
 		while ($row = $result->fetch_assoc()) {
